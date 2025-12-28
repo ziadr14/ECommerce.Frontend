@@ -1,0 +1,112 @@
+<div class="orders-container">
+
+    <div class="page-header">
+        <h2 class="page-title">
+            <i class="fa-solid fa-box-open"></i>
+            My Orders
+        </h2>
+
+
+    </div>
+
+    <div class="orders-grid" *ngIf="orders?.length; else noOrders">
+
+        <div class="order-card" *ngFor="let order of orders">
+
+            <div class="order-header">
+                <div>
+                    <span class="label">Order</span>
+                    <strong>#{{ order.id }}</strong>
+                </div>
+
+                <span class="status badge">
+                    {{ order.status }}
+                </span>
+            </div>
+
+            <div class="order-meta">
+                <span>
+                    <i class="fa-solid fa-calendar-days"></i>
+                    {{ order.orderDate | date:'mediumDate' }}
+                </span>
+
+                <span>
+                    <i class="fa-solid fa-truck-fast"></i>
+                    {{ order.deliveryMethod }}
+                </span>
+            </div>
+
+            <div class="products-list">
+                <div class="product-item" *ngFor="let item of order.orderItems">
+                    <img [src]="item.img" alt="product" />
+
+                    <div class="product-info">
+                        <strong>{{ item.productName }}</strong>
+                        <small>{{ item.description }}</small>
+
+                        <div class="product-meta">
+                            <span>
+                                <i class="fa-solid fa-xmark"></i>
+                                {{ item.quantity }}
+                            </span>
+                            <span>{{ item.price | currency }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="order-total">
+                <span>Total</span>
+                <strong>{{ order.total | currency }}</strong>
+            </div>
+
+            <div class="order-footer">
+
+                <a [routerLink]="['/orders-details', order.id]" class="details-btn">
+                    <i class="fa-solid fa-eye"></i>
+                    View Order
+                </a>
+
+                <button class="delete-btn" (click)="openDeleteModal(order.id)">
+                    <i class="fa-solid fa-trash"></i>
+                    Clear Order
+                </button>
+
+
+            </div>
+        </div>
+    </div>
+
+    <ng-template #noOrders>
+        <div class="empty-state">
+            <i class="fa-solid fa-box"></i>
+            <h3>No Orders Yet</h3>
+            <p>Looks like you haven't placed any orders.</p>
+
+            <a routerLink="/" class="shop-btn">
+                Continue Shopping
+            </a>
+        </div>
+    </ng-template>
+
+</div>
+
+<div class="modal-overlay" *ngIf="showDeleteModal">
+    <div class="modal-box">
+
+        <i class="fa-solid fa-triangle-exclamation warning-icon"></i>
+
+        <h3>Delete Order ?</h3>
+        <p>
+            Are you sure you want to delete this order ?
+            <br />
+            This action cannot be undone.
+        </p>
+
+        <div class="modal-actions">
+            <button class="cancel-btn" (click)="closeModal()">Cancel</button>
+            <button class="confirm-btn" (click)="confirmDelete()">Yes, Delete</button>
+        </div>
+
+    </div>
+</div>

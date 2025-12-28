@@ -1,0 +1,207 @@
+<div class="checkout-container">
+
+  <!-- LEFT -->
+  <div class="checkout-steps">
+    <mat-horizontal-stepper linear>
+
+      <!-- ===== SHIPPING ===== -->
+      <mat-step [stepControl]="shippingForm">
+        <form [formGroup]="shippingForm">
+
+          <ng-template matStepLabel>
+            <i class="fa-solid fa-truck-fast step-icon"></i>
+            Shipping
+          </ng-template>
+
+          <div class="form-grid">
+
+            <mat-form-field appearance="outline">
+              <mat-label>First Name</mat-label>
+              <input matInput formControlName="firstname">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Last Name</mat-label>
+              <input matInput formControlName="lastname">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Street</mat-label>
+              <input matInput formControlName="street">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>City</mat-label>
+              <input matInput formControlName="city">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>State</mat-label>
+              <input matInput formControlName="state">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Zip Code</mat-label>
+              <input matInput formControlName="zipCode">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Country</mat-label>
+              <input matInput formControlName="country">
+            </mat-form-field>
+
+          </div>
+
+          <div class="step-actions">
+            <button mat-raised-button matStepperNext>
+              Continue <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+
+        </form>
+      </mat-step>
+
+      <!-- ===== PAYMENT ===== -->
+      <mat-step [stepControl]="paymentForm">
+        <form [formGroup]="paymentForm">
+
+          <ng-template matStepLabel>
+            <i class="fa-solid fa-credit-card step-icon"></i>
+            Payment
+          </ng-template>
+
+          <!-- Delivery -->
+          <mat-radio-group
+            formControlName="deliveryMethodId"
+            class="delivery-methods">
+
+            <mat-radio-button
+              *ngFor="let method of deliveryMethods"
+              [value]="method.id"
+              class="delivery-card">
+
+              <div class="delivery-info">
+                <strong>{{ method.name }}</strong>
+                <p>{{ method.description }}</p>
+                <small>{{ method.deliveryTime }}</small>
+              </div>
+
+              <span class="delivery-price">
+                {{ method.price | currency }}
+              </span>
+
+            </mat-radio-button>
+          </mat-radio-group>
+
+          <!-- Stripe -->
+<!-- STRIPE PAYMENT -->
+<div class="stripe-box">
+<button
+  type="button"
+  class="stripe-pay-btn"
+  (click)="payWithStripe()"
+  [disabled]="paymentForm.invalid"
+>
+  <i class="fa-brands fa-cc-stripe"></i>
+  Pay securely with Stripe
+</button>
+
+
+  <p class="stripe-note">
+    <i class="fa-solid fa-lock"></i>
+    Secure payment • Visa • MasterCard
+  </p>
+
+</div>
+
+          <div class="step-actions">
+            <button mat-button matStepperPrevious>
+              <i class="fa-solid fa-arrow-left"></i> Back
+            </button>
+
+            <button mat-raised-button matStepperNext>
+              Review <i class="fa-solid fa-eye"></i>
+            </button>
+          </div>
+
+        </form>
+      </mat-step>
+
+      <!-- ===== REVIEW ===== -->
+      <mat-step>
+
+        <ng-template matStepLabel>
+          <i class="fa-solid fa-clipboard-check step-icon"></i>
+          Review
+        </ng-template>
+
+        <div class="review-box">
+          <h3><i class="fa-solid fa-location-dot"></i> Shipping</h3>
+
+          <p>{{ shippingForm.value.firstname }} {{ shippingForm.value.lastname }}</p>
+          <p>{{ shippingForm.value.street }}</p>
+          <p>{{ shippingForm.value.city }} - {{ shippingForm.value.state }}</p>
+          <p>{{ shippingForm.value.zipCode }} / {{ shippingForm.value.country }}</p>
+
+          <hr>
+
+          <h3><i class="fa-solid fa-cart-shopping"></i> Order</h3>
+          <p>Items: {{ getItemsCount() }}</p>
+          <p>Subtotal: {{ getSubtotal() | currency }}</p>
+          <p>Shipping: {{ getShippingPrice() | currency }}</p>
+          <p><strong>Total: {{ getTotal() | currency }}</strong></p>
+        </div>
+
+<div class="step-actions">
+  <button mat-button matStepperPrevious>
+    <i class="fa-solid fa-arrow-left"></i> Back
+  </button>
+
+  <!-- Confirm without payment -->
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="confirmOrderWithoutPayment()"
+  >
+    Confirm Order (Pay Later)
+  </button>
+</div>
+
+
+      </mat-step>
+
+    </mat-horizontal-stepper>
+  </div>
+
+  <!-- RIGHT SUMMARY -->
+  <div class="basket-summary">
+    <div class="order-summary-card">
+
+      <h4 class="summary-title">
+        <i class="fa-solid fa-receipt"></i> ORDER SUMMARY
+      </h4>
+
+      <div class="summary-line">
+        <span>Items</span>
+        <span>{{ getItemsCount() }}</span>
+      </div>
+
+      <div class="summary-line">
+        <span>Subtotal</span>
+        <span>{{ getSubtotal() | currency }}</span>
+      </div>
+
+      <div class="summary-line">
+        <span>Shipping</span>
+        <span>{{ getShippingPrice() | currency }}</span>
+      </div>
+
+      <div class="summary-line total">
+        <span>Total</span>
+        <span>{{ getTotal() | currency }}</span>
+      </div>
+
+    </div>
+  </div>
+
+</div>

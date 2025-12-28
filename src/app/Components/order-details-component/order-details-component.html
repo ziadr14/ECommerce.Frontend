@@ -1,0 +1,57 @@
+<div class="order-details" *ngIf="order">
+
+    <h2>
+        Order #{{ order.id }}
+        <span class="status">
+            {{ order.status }}
+        </span>
+    </h2>
+
+    <div class="info-grid">
+        <div>
+            <label>Date</label>
+            <p>{{ order.orderDate | date:'medium' }}</p>
+        </div>
+
+        <div>
+            <label>Delivery</label>
+            <p>{{ order.deliveryMethod }}</p>
+        </div>
+
+        <div>
+            <label>Shipping Price</label>
+            <p>{{ order.deliveryPrice | currency }}</p>
+        </div>
+    </div>
+
+    <div class="products">
+
+        <div class="product" *ngFor="let item of order.orderItems">
+
+            <img [src]="item.img" />
+
+            <div class="details">
+                <strong>{{ item.productName }}</strong>
+                <small>{{ item.description }}</small>
+
+                <div class="meta">
+                    <span>Qty: {{ item.quantity }}</span>
+                    <span>{{ item.price | currency }}</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="total-box">
+        <span>Total</span>
+        <strong>{{ order.total | currency }}</strong>
+    </div>
+
+    <button class="btn btn-primary" (click)="sendInvoice(order.id)">
+        Send Invoice PDF
+    </button>
+
+
+</div>
+

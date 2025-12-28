@@ -1,0 +1,49 @@
+<div class="product-item" data-aos="fade-up" data-aos-delay="100">
+
+    <div class="product-card">
+
+        <div class="product-img">
+            <img class="main-img" [src]="mainImage" alt="Product">
+
+            <button class="bookmark-btn">
+                <i class="fa fa-bookmark"></i>
+            </button>
+        </div>
+
+        <div class="thumbs-container">
+            @for (item of product.photos; track $index) {
+            <img class="thumb-img" [src]="'https://localhost:7201/productPhotos/' + item.photoUrl"
+                [class.active-thumb]="mainImage.includes(item.photoUrl)" (click)="changeMainImage(item.photoUrl)">
+            }
+        </div>
+
+        <div class="product-content">
+            <h5 class="product-title">{{ product.name }}</h5>
+            <p class="product-desc">{{ product.description }}</p>
+
+            <p class="product-price">
+                <span class="old-price">{{ product.oldPrice }}</span>
+                <span class="new-price">{{ product.newPrice }}</span>
+            </p>
+
+            <div class="product-actions">
+                <button class="add-to-cart" (click)="addToCart(product)">
+                    <i class="fa fa-cart-plus"></i> Add to Cart
+                </button>
+
+                <button class="details" routerLink="/shop/product-details/{{product.id}}">
+                    <i class="fa fa-info-circle"></i> Details
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<ng-template #empty>
+    <div class="empty-basket">
+        <h2><i class="fas fa-shopping-cart"></i> Your cart is empty</h2>
+        <p>Add some products to see them here.</p>
+    </div>
+</ng-template>

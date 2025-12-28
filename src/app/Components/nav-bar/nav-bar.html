@@ -1,0 +1,52 @@
+<nav class="navbar" [class.scrolled]="scrolled">
+    <div class="logo">
+        <i class="fas fa-laptop"></i> My Laptop Store
+    </div>
+
+    <div class="menu-toggle" (click)="toggleMenu()">
+        <i class="fas fa-bars"></i>
+    </div>
+
+    <ul class="nav-links" [class.active]="menuActive">
+        <li><a (click)="toggleMenu()" routerLink="/home"><i class="fas fa-home"></i> Home</a></li>
+        <li><a (click)="toggleMenu()" routerLink="/shop"><i class="fas fa-shopping-bag"></i> Shop Items</a></li>
+        <li><a (click)="toggleMenu()" routerLink="/about-us"><i class="fas fa-info-circle"></i> About Us</a></li>
+        <li><a (click)="toggleMenu()" routerLink="/contact_us"><i class="fas fa-envelope"></i> Contact</a></li>
+        <li><a (click)="toggleMenu()" routerLink="/orders"><i class="fas fa-envelope"></i> My Orders</a></li>
+
+        <li class="dropdown" (click)="toggleUserDropdown()">
+            <a><i class="fas fa-user"></i> User <i class="fas fa-caret-down"></i></a>
+            <ul class="dropdown-menu" [class.show]="userDropdownActive">
+
+
+                <ng-container *ngIf="!isLoggedIn; else loggedInMenu">
+                    <li>
+                        <a (click)="toggleMenu()" routerLink="/login">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </a>
+                    </li>
+                    <li>
+                        <a (click)="toggleMenu()" routerLink="/register">
+                            <i class="fas fa-user-plus"></i> Register
+                        </a>
+                    </li>
+                </ng-container>
+
+
+                <ng-template #loggedInMenu>
+                    <li>
+                        <a (click)="logout(); toggleMenu()">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </li>
+                </ng-template>
+
+            </ul>
+
+        </li>
+
+        <li>
+            <a (click)="toggleMenu()" routerLink="/basket"><i class="fas fa-shopping-cart"></i> Cart</a>
+        </li>
+    </ul>
+</nav>

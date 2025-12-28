@@ -1,0 +1,10 @@
+<div class="pagination-wrapper">
+<pagination
+    [itemsPerPage]="pageSize"
+    [totalItems]="TotalCount"
+    (pageChanged)="OnPageChange($event.page)"
+    [directionLinks]="true"
+    [boundaryLinks]="false">
+</pagination>
+
+</div>

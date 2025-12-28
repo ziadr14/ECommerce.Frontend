@@ -1,0 +1,80 @@
+<div class="container mt-5 mb-5">
+
+    <h1 class="main-title">Shopping</h1>
+
+    <div class="row">
+
+        <aside class="col-lg-3 col-md-4 mb-4">
+            <div class="sidebar" data-aos="fade-up" data-aos-delay="100">
+
+                <h4 class="section-title">Sorting</h4>
+
+                <div class="custom-select-wrapper">
+                    <div class="custom-select" (click)="toggleSortDropdown()">
+                        <span>{{ selectedOption || 'Select option' }}</span>
+                        <i class="material-icons">expand_more</i>
+                    </div>
+
+                    <ul class="custom-options" [class.show]="sortVisible">
+                        <li *ngFor="let item of SortOptions" class="option" (click)="selectSort(item)"
+                            [class.active]="ProductParams.SortSelecting === item.value">
+                            {{ item.name }}
+                        </li>
+                    </ul>
+                </div>
+
+                <h4 class="section-title">Categories</h4>
+
+                <ul class="list-group">
+                    @for (item of category || []; track $index) {
+                    <li class="custom-list-item" [class.active]="item.id === ProductParams.CategoryId"
+                        (click)="SelectedId(item.id)">
+                        {{ item.name }}
+                    </li>
+                    }
+                </ul>
+
+            </div>
+        </aside>
+
+        <main class="col-lg-9 col-md-8">
+
+            <!-- TOP BAR -->
+            <div class="top-bar">
+
+                <div class="paging-container">
+                    <span>Showing {{product.length}} of {{TotalCount}}</span>
+                </div>
+
+                <div class="search-bar" data-aos="fade-up" data-aos-delay="100">
+                    <input #search (keyup.enter)="OnSearch(search.value)" (keyup)="OnSearch(search.value)" type="text" class="form-control search-input"
+                        placeholder="Search...">
+
+
+                    <button class="btn btn-primary customOptionButton " (click)="OnSearch(search.value)">
+                        Search
+                    </button>
+
+                    <button class="btn btn-primary customOptionButton" (click)="ResetValue()">
+                        Reset
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="products-grid">
+                @for (item of product; track $index) {
+                <app-shop-item [product]="item"></app-shop-item>
+                }
+            </div>
+
+            <div class="pagination-wrapper" >
+                <app-pagination [pageSize]="ProductParams.pageSize" [TotalCount]="TotalCount"
+                    (pageChanged)="OnPageChange($event)">
+                </app-pagination>
+            </div>
+
+        </main>
+
+    </div>
+</div>

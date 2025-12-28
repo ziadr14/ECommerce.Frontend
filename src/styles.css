@@ -1,1 +1,90 @@
-/* You can add global styles to this file, and also import other style files */
+
+@import "aos/dist/aos.css";
+
+body {
+    background: linear-gradient(135deg, #1e1e2f, #2a2a3d); 
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+}
+button {
+    transition: transform 0.15s ease;
+}
+
+button:active {
+    transform: scale(1.1);
+}
+
+
+
+.pagination {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 8px;
+    padding: 0;
+    margin: 40px 0;
+}
+
+
+.pagination .page-item .page-link {
+    background: linear-gradient(135deg, #2a2a3d, #3a3a55) !important;
+    color: #00e5ff !important;
+    border: 1px solid rgba(0,229,255,0.25) !important;
+    border-radius: 12px !important;
+    padding: 9px 16px !important;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow:
+        0 4px 12px rgba(0,0,0,0.45),
+        inset 0 0 6px rgba(0,229,255,0.15);
+}
+
+.pagination .page-item .page-link:hover {
+    background: linear-gradient(135deg, #00e5ff, #00bcd4) !important;
+    color: #000 !important;
+    transform: translateY(-2px);
+    box-shadow:
+        0 8px 18px rgba(0,229,255,0.5),
+        inset 0 0 8px rgba(255,255,255,0.3);
+}
+
+.pagination .page-item.active .page-link {
+    background: linear-gradient(135deg, #00e5ff, #00bcd4) !important;
+    color: #000 !important;
+    font-weight: 700;
+    box-shadow: 0 0 18px rgba(0,229,255,0.7);
+}
+
+.pagination .page-item.disabled .page-link {
+    opacity: 0.35 !important;
+    pointer-events: none;
+}
+
+
+@media (max-width: 576px) {
+
+    .pagination .page-item {
+        display: none;
+    }
+
+    .pagination .page-item:first-child,
+    .pagination .page-item:last-child,
+    .pagination .page-item.active {
+        display: block;
+    }
+
+    .pagination .page-link {
+        padding: 6px 10px !important;
+        font-size: 12px;
+        border-radius: 9px !important;
+    }
+}
+
+@media (max-width: 360px) {
+    .pagination .page-item.active {
+        display: none;
+    }
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

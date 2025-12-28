@@ -1,0 +1,95 @@
+<div class="success-wrapper" *ngIf="order">
+
+  <div class="success-card">
+
+    <div class="icon-wrapper">
+      <i class="fa-solid fa-circle-check"></i>
+    </div>
+
+    <h2>Order Confirmed </h2>
+    <p class="subtitle">
+      Thank you! Your order has been placed successfully.
+    </p>
+
+    <div class="divider"></div>
+
+    <div class="order-info">
+      <div>
+        <span>Order ID</span>
+        <strong>#{{ order.id }}</strong>
+      </div>
+
+      <div>
+        <span>Date</span>
+        <strong>{{ order.orderDate | date:'medium' }}</strong>
+      </div>
+
+      <div>
+        <span>Status</span>
+        <strong class="status">
+          {{ order.status === 0 ? 'Pending' : 'Completed' }}
+        </strong>
+      </div>
+
+      <div>
+        <span>Delivery</span>
+        <strong>{{ order.deliveryMethod }}</strong>
+      </div>
+    </div>
+
+    <div class="products">
+      <h4>Order Items</h4>
+
+<div class="product" *ngFor="let item of order.orderItems">
+
+  <img
+    [src]="item.img"
+    alt="Product Image"
+    class="product-img"
+  />
+
+  <div class="details">
+    <h5>{{ item.productName }}</h5>
+    <p>Qty: {{ item.quantity }}</p>
+  </div>
+
+  <div class="price">
+    {{ item.price | currency:'EGP' }}
+  </div>
+
+</div>
+
+    </div>
+
+    <div class="totals">
+      <div>
+        <span>Subtotal</span>
+        <strong>{{ order.subTotal | currency:'EGP' }}</strong>
+      </div>
+
+      <div>
+        <span>Shipping</span>
+        <strong>{{ order.deliveryPrice | currency:'EGP' }}</strong>
+      </div>
+
+      <div class="grand-total">
+        <span>Total</span>
+        <strong>{{ order.total | currency:'EGP' }}</strong>
+      </div>
+    </div>
+
+    <div class="actions">
+      <a routerLink="/orders" class="btn secondary">
+        <i class="fa-solid fa-receipt"></i>
+        View Orders
+      </a>
+
+      <a routerLink="/shop" class="btn primary">
+        <i class="fa-solid fa-house"></i>
+        Continue Shopping
+      </a>
+    </div>
+
+  </div>
+
+</div>

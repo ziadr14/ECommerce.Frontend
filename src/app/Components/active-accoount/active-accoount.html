@@ -1,0 +1,23 @@
+<div class="activation-container">
+
+    <div *ngIf="status === 'loading'" class="card">
+        <div class="spinner"></div>
+        <h3>Activating your account</h3>
+        <p>Please wait a moment...</p>
+    </div>
+
+    <div *ngIf="status === 'success'" class="card success">
+        <i class="fa-solid fa-circle-check"></i>
+        <h3>Account Activated 🎉</h3>
+        <p>Your account has been activated successfully</p>
+        <button (click)="goToLogin()">Go to Login</button>
+    </div>
+
+    <div *ngIf="status === 'error'" class="card error">
+        <i class="fa-solid fa-circle-xmark"></i>
+        <h3>Activation Failed</h3>
+        <p>{{ errorMessage }}</p>
+        <button (click)="goToRegister()">Register Again</button>
+    </div>
+
+</div>

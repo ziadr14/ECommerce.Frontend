@@ -1,0 +1,82 @@
+<div class="register-container">
+    <form [formGroup]="formGroup" class="register-card" (ngSubmit)="Submit()">
+
+        <h2>Create Account</h2>
+        <p class="subtitle">Join us and start shopping</p>
+
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" formControlName="displayName" placeholder="Enter name" />
+
+            <small *ngIf="_displayName?.touched && _displayName?.invalid">
+                <span *ngIf="_displayName?.errors?.['required']">Name is required</span>
+                <span *ngIf="_displayName?.errors?.['minlength']">Minimum 3 characters</span>
+                <span *ngIf="_displayName?.errors?.['maxlength']">Maximum 20 characters</span>
+            </small>
+        </div>
+
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" formControlName="username" placeholder="Enter username" />
+
+            <small *ngIf="_username?.touched && _username?.invalid">
+                <span *ngIf="_username?.errors?.['required']">Username is required</span>
+                <span *ngIf="_username?.errors?.['minlength']">Minimum 3 characters</span>
+                <span *ngIf="_username?.errors?.['maxlength']">Maximum 20 characters</span>
+            </small>
+        </div>
+
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" formControlName="email" placeholder="Enter email" />
+
+            <small *ngIf="_email?.touched && _email?.invalid">
+                <span *ngIf="_email?.errors?.['required']">Email is required</span>
+                <span *ngIf="_email?.errors?.['email']">Invalid email format</span>
+            </small>
+        </div>
+
+        <div class="form-group password-group">
+            <label>Password</label>
+            <input [type]="showPassword ? 'text' : 'password'" formControlName="password"
+                placeholder="Enter password" />
+
+            <i class="fa toggle-password" [class.fa-eye]="!showPassword" [class.fa-eye-slash]="showPassword"
+                (click)="showPassword = !showPassword"></i>
+
+            <small *ngIf="_password?.touched && _password?.invalid">
+                <span *ngIf="_password?.errors?.['required']">Password is required</span>
+                <span *ngIf="_password?.errors?.['minlength']">Minimum 6 characters</span>
+                <span *ngIf="_password?.errors?.['pattern']">
+                    Must include Upper, Lower, Number & Symbol
+                </span>
+            </small>
+        </div>
+
+        <div class="form-group password-group">
+            <label>Confirm Password</label>
+            <input [type]="showConfirmPassword ? 'text' : 'password'" formControlName="confirmPassword"
+                placeholder="Confirm password" />
+
+            <i class="fa toggle-password" [class.fa-eye]="!showConfirmPassword"
+                [class.fa-eye-slash]="showConfirmPassword" (click)="showConfirmPassword = !showConfirmPassword"></i>
+
+            <small *ngIf="
+          (_confirmPassword?.touched || _password?.touched) &&
+          formGroup.errors?.['passwordMismatch']
+        ">
+                Passwords do not match
+            </small>
+        </div>
+
+        <button type="submit" [disabled]="formGroup.invalid">
+            Register
+        </button>
+
+        <p class="login-link">
+            Already have an account?
+            <a routerLink="/login">Login</a>
+        </p>
+
+    </form>
+</div>

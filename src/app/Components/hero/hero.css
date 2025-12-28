@@ -1,0 +1,85 @@
+.carousel {
+  margin-top: 150px;
+  box-shadow: 0 10px 25px rgba(0, 229, 255, 0.25);
+  background: linear-gradient(135deg, #1f1f2e, #2a2a40);
+  border-radius: 22px;
+  color: #fff;
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; 
+  transition: all 0.4s ease-in-out;
+  padding: 40px 30px;
+}
+
+.promo-title {
+  font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+  font-weight: 800;
+  color: #00e5ff;
+  text-shadow: 0 0 15px rgba(0, 229, 255, 0.7);
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+}
+
+.promo-desc {
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  color: #ddd;
+  margin-bottom: 25px;
+  line-height: 1.7;
+  max-width: 800px; 
+
+
+}
+
+.promo-btn {
+  background: linear-gradient(90deg, #00e5ff, #00bcd4);
+  color: #000;
+  font-weight: bold;
+  padding: 12px 36px;
+  border-radius: 14px;
+  transition: all 0.3s ease;
+  font-size: clamp(0.9rem, 2.2vw, 1.15rem);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.promo-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 15px rgba(0, 229, 255, 0.5);
+}
+@media (max-width: 992px) {
+  .carousel {
+    min-height: 360px;
+    padding: 35px 25px;
+    border-radius: 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel {
+    min-height: auto;
+    padding: 30px 20px;
+  }
+
+  .promo-desc {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel {
+    padding: 22px 15px;
+    border-radius: 12px;
+  }
+
+  .promo-title {
+    font-size: 1.4rem;
+  }
+
+  .promo-btn {
+    width: 100%; 
+    text-align: center;
+    padding: 12px;
+  }
+}

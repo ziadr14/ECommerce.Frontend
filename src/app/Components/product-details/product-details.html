@@ -1,0 +1,93 @@
+<div class="container  mt-5" *ngIf="product">
+
+  <div class="row g-5 product-wrapper justify-content-center align-items-center">
+
+    <div class="mmm col-lg-5 d-flex flex-column align-items-center" data-aos="fade-up" data-aos-delay="100">
+      <div class="card shadow-sm p-3 bg-gradient-custom p-3 rounded card shadow-custom p-3 rounded mb-5 rounded w-100">
+
+        <div class="zoom-wrapper mb-3 w-100 text-center">
+          <img class="main-img img-fluid rounded" [src]="mainImage" alt="Product Image" />
+        </div>
+
+        <div class="thumbs d-flex justify-content-center gap-2 flex-wrap mt-2">
+          <img *ngFor="let img of product.photos" [src]="'https://localhost:7201/productPhotos/' + img.photoUrl"
+            [class.active]="mainImage.includes(img.photoUrl)" (click)="changeMainImage(img.photoUrl)"
+            class="thumb-img rounded border p-1" />
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-7 d-flex flex-column align-items-center">
+      <div class="info-box p-3 rounded w-100 text-center" data-aos="fade-up" data-aos-delay="100">
+
+        <span class="badge bg-primary mb-2">{{ product.categoryName }}</span>
+
+        <h1 class="title fw-bold mb-2">{{ product.name }}</h1>
+
+        <p class="desc ">{{ product.description }}</p>
+
+        <div class="price-box mb-3">
+          <span class="old text-decoration-line-through text-secondary me-2" *ngIf="product.oldPrice">
+            {{ product.oldPrice | currency:'EGP':'symbol' }}
+          </span>
+          <span class="new fs-3 fw-bold text-danger">
+            {{ product.newPrice | currency:'EGP':'symbol' }}
+          </span>
+        </div>
+
+        <div class="actions d-flex gap-3 mt-4 justify-content-center">
+<button
+  class="btn cart btn-lg"
+  [disabled]="isAdding"
+  (click)="addToCart(product)"
+>
+  <i class="fa fa-cart-plus me-2"></i>
+  {{ isAdding ? 'Adding...' : 'Add to Cart' }}
+</button>
+
+
+          <button class="btn wish btn-lg">
+            <i class="fa fa-heart"></i>
+          </button>
+        </div>
+
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="similar-section mt-5 text-center" >
+
+    <div class="section-header mb-4">
+      <h3>Similar Products</h3>
+      <p>You may also like</p>
+    </div>
+
+    <div class="row justify-content-center"  *ngIf="isLoadingSimilar">
+      <div class="col-md-2" *ngFor="let i of [1,2,3,4,5,6]">
+        <div class="skeleton-card"></div>
+      </div>
+    </div>
+
+    <div class="row justify-content-center" *ngIf="!isLoadingSimilar" data-aos="fade-up" data-aos-delay="100">
+      <div class="col-lg-2 col-md-3 col-sm-6 mb-4" *ngFor="let item of similarProducts">
+        <div class="similar-card" (click)="goToProduct(item.id)">
+          <img [src]="item.photos?.length
+                ? 'https://localhost:7201/productPhotos/' + item.photos[0].photoUrl
+                : 'assets/no-image.png'" />
+          <h6>{{ item.name }}</h6>
+          <span>{{ item.newPrice | currency:'EGP' }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-center align-items-center mt-5">
+      <app-pagination [pageSize]="ProductParams.pageSize" [TotalCount]="similarTotalCount"
+        (pageChanged)="onSimilarPageChange($event)">
+      </app-pagination>
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,87 @@
+.order-details {
+
+  max-width: 900px;
+  margin: 100px auto;
+  padding: 30px;
+  background: rgba(30,30,47,.95);
+  border-radius: 22px;
+  color: #fff;
+}
+
+h2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.status {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+}
+
+.status.pending { background: #ff980020; color: #ff9800; }
+.status.paid { background: #4caf5020; color: #4caf50; }
+.status.shipped { background: #2196f320; color: #2196f3; }
+.status.cancelled { background: #f4433620; color: #f44336; }
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 30px 0;
+  gap: 20px;
+}
+
+.info-grid label {
+  color: #9ea7ad;
+  font-size: 13px;
+}
+
+.products {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.product {
+  display: flex;
+  gap: 16px;
+  background: rgba(255,255,255,.05);
+  padding: 14px;
+  border-radius: 16px;
+}
+
+.product img {
+  width: 80px;
+  height: 80px;
+  border-radius: 14px;
+  object-fit: cover;
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  color: #00e5ff;
+}
+
+.total-box {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  font-size: 20px;
+  border-top: 1px dashed #444;
+  padding-top: 16px;
+}
+
+.invoice-btn {
+  margin-top: 30px;
+  width: 100%;
+  padding: 14px;
+  border-radius: 18px;
+  background: linear-gradient(135deg,#00bcd4,#26c6da);
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+}

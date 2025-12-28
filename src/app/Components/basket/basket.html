@@ -1,0 +1,53 @@
+<div *ngIf="loading" class="loading-container">
+    <div class="spinner"></div>
+    <p>Loading your basket...</p>
+</div>
+
+<div class="basket-container"  *ngIf="!loading && basket && basket.items.length > 0; else empty">
+    <!-- Left: Items -->
+    <div class="basket-items">
+        <h2 class="basket-title"><i class="fas fa-shopping-cart"></i> Shopping Cart</h2>
+
+        <div data-aos="fade-up" data-aos-delay="100" class="basket-item" *ngFor="let item of basket.items">
+            <img [src]="item.img" alt="{{ item.productName }}" />
+
+            <div class="item-details"  routerLink="/shop/product-details/{{item.productId}}">
+                <h4><i class="fas fa-laptop"></i> {{ item.productName }}</h4>
+                <p class="desc"><i class="fas fa-info-circle"></i> {{ item.description }}</p>
+                <p class="price"><i class="fas fa-dollar-sign"></i> {{ item.price | currency }}</p>
+            </div>
+
+            <div class="quantity">
+                <button (click)="decreaseQuantity(item)"><i class="fas fa-minus"></i></button>
+                <span>{{ item.quantity }}</span>
+                <button (click)="increaseQuantity(item)"><i class="fas fa-plus"></i></button>
+            </div>
+
+            <button class="remove" (click)="removeItem(item.productId)">
+                <i class="fas fa-trash-alt"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Right: Summary -->
+    <div class="basket-summary" data-aos="fade-up" data-aos-delay="100">
+        <h2><i class="fas fa-receipt"></i> Order Summary</h2>
+        <div class="summary-details" >
+            <p><i class="fas fa-box"></i> <strong>Items:</strong> {{ basket.items.length }}</p>
+            <p><i class="fas fa-money-bill-wave"></i> <strong>Total:</strong> {{ basket.total | currency }}</p>
+        </div>
+
+
+        <button class="checkout" routerLink="/checkout"><i class="fas fa-credit-card"></i> Proceed to Checkout</button>
+        <button class="clear" (click)="clearBasket()"><i class="fas fa-trash"></i> Clear Cart</button>
+    </div>
+
+
+</div>
+
+<ng-template #empty>
+    <div class="empty-basket">
+        <h2><i class="fas fa-shopping-cart"></i> Your cart is empty</h2>
+        <p>Add some products to see them here.</p>
+    </div>
+</ng-template>
