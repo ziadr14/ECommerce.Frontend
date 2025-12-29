@@ -1,59 +1,60 @@
-# Ecommerce
+# E-Commerce Frontend Application
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.2.2.
+A full-featured **E-Commerce Frontend Application** built using **Angular** and **TypeScript**.  
+This project simulates a real-world online shopping platform with authentication, product management, basket handling, checkout flow, and order tracking.
 
-## Development server
+The application is designed with scalability and clean architecture in mind, using Angular best practices such as services, guards, interceptors, and modular components.
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
-```
+## 🚀 Features
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### 🔐 Authentication & User Management
+- User Registration
+- Login & Logout
+- Account Activation
+- Forgot & Reset Password
+- JWT Authentication
+- Route Protection using Auth Guards
 
-## Code scaffolding
+### 🛒 Shopping Experience
+- Home Page with Featured Products
+- Product Listing with Pagination
+- Product Details Page
+- Shopping Basket (Add / Remove / Update Quantity)
+- Checkout Process
+- Order Success Page
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### 📦 Orders
+- View Order History
+- Order Details Page
+- Delivery Method Selection
 
-```bash
-ng generate component component-name
-```
+### 📄 Informational Pages
+- About Us
+- Contact Us (Send Messages)
+- Responsive Navigation Bar & Footer
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### ⚙️ Technical Features
+- HTTP Interceptors (Auth & Loader)
+- Global Loading Indicator
+- Environment-based API Configuration
+- Strong Typing using TypeScript Interfaces
 
-```bash
-ng generate --help
-```
+---
 
-## Building
+## 🛠️ Tech Stack
 
-To build the project run:
+- **Framework:** Angular
+- **Language:** TypeScript
+- **Styling:** CSS & SCSS
+- **Architecture:** Component-Based Architecture
+- **Routing:** Angular Router
+- **State Handling:** Services & Observables
+- **Authentication:** JWT
+- **Testing:** Jasmine & Karma
 
-```bash
-ng build
-```
+---
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## 📂 Project Structure
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
